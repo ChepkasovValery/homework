@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: 5568771391735819375}
   - component: {fileID: 659620479434099170}
   - component: {fileID: 102605417607457000}
+  - component: {fileID: -4067542720497010482}
+  - component: {fileID: 1482261554329963244}
+  - component: {fileID: -1733646168854652210}
+  - component: {fileID: 7031113101368738605}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -162,12 +166,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a324f54d94d6e84681731f36566c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
-  firePoint: {fileID: 3195880656587174614}
-  health: 3
+  _health: {fileID: -4067542720497010482}
+  _moveToPointComponent: {fileID: 1482261554329963244}
+  _enemyGunController: {fileID: -1733646168854652210}
+--- !u!114 &-4067542720497010482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128de4c66f0a4ee29d933f0b1869165b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 3
+--- !u!114 &1482261554329963244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c984c2e09649d08d2a3c01b6aa354e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveConfig: {fileID: 11400000, guid: 344f4965f4595457bbb2bd5f528a0ee9, type: 2}
   _rigidbody: {fileID: 659620479434099170}
-  speed: 3
-  countdown: 1
+--- !u!114 &-1733646168854652210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fff25314f36483e9a805870858f19e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 102605417607457000}
+  _gun: {fileID: 7031113101368738605}
+  _fireDelay: 3
+--- !u!114 &7031113101368738605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0618c0bb6d42e087ad10bf0d730a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firePoint: {fileID: 3195880656587174614}
+  _gunConfig: {fileID: 11400000, guid: 42311001cffe1489883123d89147ca79, type: 2}
 --- !u!1 &2239154907127902911
 GameObject:
   m_ObjectHideFlags: 0
