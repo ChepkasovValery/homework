@@ -8,16 +8,20 @@ namespace Game.Gun
     [SerializeField] private Transform _firePoint;
     [SerializeField] private GunConfig _gunConfig;
     
-    private BulletsController _bulletsController;
+    private BulletManager bulletManager;
 
-    public void Construct(BulletsController bulletsController)
+    public void Construct(BulletManager bulletManager)
     {
-      _bulletsController = bulletsController;
+      this.bulletManager = bulletManager;
     }
     
     public void Fire(Vector3 direction)
     {
-      _bulletsController.SpawnBullet(_gunConfig.Damage, _gunConfig.BulletColor, (int)_gunConfig.PhysicsLayer, _firePoint.position, direction * _gunConfig.BulletSpeed);
+      bulletManager.SpawnBullet(_gunConfig.Damage, 
+        _gunConfig.BulletColor, 
+        (int)_gunConfig.PhysicsLayer, 
+        _firePoint.position, 
+        direction * _gunConfig.BulletSpeed);
     }
   }
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1482261554329963244}
   - component: {fileID: -1733646168854652210}
   - component: {fileID: 7031113101368738605}
+  - component: {fileID: 2914633885375620625}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -167,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: -4067542720497010482}
-  _moveToPointComponent: {fileID: 1482261554329963244}
-  _enemyGunController: {fileID: -1733646168854652210}
+  _moveAgent: {fileID: 1482261554329963244}
+  _attackAgent: {fileID: -1733646168854652210}
 --- !u!114 &-4067542720497010482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,8 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c984c2e09649d08d2a3c01b6aa354e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveConfig: {fileID: 11400000, guid: 344f4965f4595457bbb2bd5f528a0ee9, type: 2}
-  _rigidbody: {fileID: 659620479434099170}
+  _moveComponent: {fileID: 2914633885375620625}
+  _stopDistance: 0.25
 --- !u!114 &-1733646168854652210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fff25314f36483e9a805870858f19e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 102605417607457000}
   _gun: {fileID: 7031113101368738605}
   _fireDelay: 3
 --- !u!114 &7031113101368738605
@@ -225,6 +225,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firePoint: {fileID: 3195880656587174614}
   _gunConfig: {fileID: 11400000, guid: 42311001cffe1489883123d89147ca79, type: 2}
+--- !u!114 &2914633885375620625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0835594834d4748d5af74a96b5ab109b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveConfig: {fileID: 11400000, guid: 344f4965f4595457bbb2bd5f528a0ee9, type: 2}
+  _rigidbody: {fileID: 659620479434099170}
 --- !u!1 &2239154907127902911
 GameObject:
   m_ObjectHideFlags: 0

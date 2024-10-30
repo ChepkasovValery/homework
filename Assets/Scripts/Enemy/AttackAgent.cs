@@ -3,24 +3,29 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-  public class EnemyGunController : MonoBehaviour
+  public class AttackAgent : MonoBehaviour
   {
-    [SerializeField] private Enemy _enemy;
     [SerializeField] private Gun _gun;
     [SerializeField] private float _fireDelay;
     
     private float _cooldown;
     private Transform _target;
+    private bool _canFire;
 
-    public void Construct(BulletsController bulletsController, Transform target)
+    public void Construct(BulletManager bulletManager, Transform target)
     {
       _target = target;
-      _gun.Construct(bulletsController);
+      _gun.Construct(bulletManager);
+    }
+
+    public void SetCanFire(bool canFire)
+    {
+      _canFire = canFire;
     }
     
     private void FixedUpdate()
     {
-      if (_enemy.IsReadyToFire)
+      if (_canFire)
       {
         _cooldown -= Time.deltaTime;
 

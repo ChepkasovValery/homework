@@ -2,23 +2,23 @@ using System;
 using Game.Health;
 using Game.Move;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
   public sealed class Enemy : MonoBehaviour
   {
-    public bool IsReadyToFire { get; private set; }
     public event Action<Enemy> OnHealthEnded;
 
     [SerializeField] private HealthComponent _health;
-    [SerializeField] private MoveToPointComponent _moveToPointComponent;
-    [SerializeField] private EnemyGunController _enemyGunController;
+    [SerializeField] private MoveAgent _moveAgent;
+    [SerializeField] private AttackAgent _attackAgent;
     
     private bool _canFire;
 
-    public void Construct(BulletsController bulletsController, Transform target)
+    public void Construct(BulletManager bulletManager, Transform target)
     {
-      _enemyGunController.Construct(bulletsController, target);
+      _attackAgent.Construct(bulletManager, target);
     }
 
     private void OnEnable()
@@ -43,12 +43,11 @@ namespace ShootEmUp
 
     public void MoveTo(Vector2 endPoint)
     {
-      IsReadyToFire = false;
+      _attackAgent.SetCanFire(false);
       
-      _moveToPointComponent.MoveTo(endPoint, () =>
+      _moveAgent.MoveTo(endPoint, () =>
       {
-        if(_canFire)
-          IsReadyToFire = true;
+          _attackAgent.SetCanFire(_canFire);
       });
     }
 

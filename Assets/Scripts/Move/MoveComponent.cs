@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Move
 {
-  public class DirectionMoveComponent : MonoBehaviour
+  public class MoveComponent : MonoBehaviour
   {
     [SerializeField] private MoveConfig _moveConfig;
     [SerializeField] private Rigidbody2D _rigidbody;

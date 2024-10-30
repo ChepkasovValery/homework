@@ -1,18 +1,18 @@
+using Game.Pool;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-  public class EnemyCreator : MonoBehaviour
+  public class EnemyCreator : MonoBehaviour, ICreator<Enemy>
   {
     [SerializeField] private Enemy _enemyPrefab;
-    [SerializeField] private Transform _container;
     [SerializeField] private Transform _player;
-    [SerializeField] private BulletsController _bulletsController;
+    [SerializeField] private BulletManager _bulletManager;
 
     public Enemy Create()
     {
-      Enemy enemy = Instantiate(_enemyPrefab, _container);
-      enemy.Construct(_bulletsController, _player);
+      Enemy enemy = Instantiate(_enemyPrefab);
+      enemy.Construct(_bulletManager, _player);
       
       return enemy;
     }

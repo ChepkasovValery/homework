@@ -1,48 +1,43 @@
-using System.Collections;
+using Game.Pool;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ShootEmUp
 {
-  public class EnemiesController : MonoBehaviour
+  public class EnemyManager : MonoBehaviour
   {
-    [SerializeField] private EnemiesPool _enemyPool;
-
     [SerializeField] private Transform[] _spawnPositions;
     [SerializeField] private Transform[] _attackPositions;
 
-    [SerializeField] private Transform _enemiesContainer;
     [SerializeField] private Transform _world;
+    [SerializeField] private EnemyCreator _enemyCreator;
 
     private int _activeEnemiesCount;
+    private Pool<Enemy> _enemyPool;
 
     private void Awake()
     {
-      _enemyPool.Prewarm(7);
+      _enemyPool = new Pool<Enemy>(_enemyCreator);
     }
 
-    private IEnumerator Start()
+    public void SpawnEnemy()
     {
-      while (true)
+      Enemy enemy = _enemyPool.Get();
+
+      ConfigureEnemy(enemy);
+
+      if (_activeEnemiesCount < 5)
       {
-        yield return new WaitForSeconds(Random.Range(1, 2));
+        _activeEnemiesCount++;
 
-        Enemy enemy = _enemyPool.Get();
-          
-        ConfigureEnemy(enemy);
-
-        if (_activeEnemiesCount < 5)
-        {
-          _activeEnemiesCount++;
-          
-          enemy.SetCanFire(true);
-        }
-        else
-        {
-          enemy.SetCanFire(false);
-        }
+        enemy.SetCanFire(true);
+      }
+      else
+      {
+        enemy.SetCanFire(false);
       }
     }
-      
+
     private void ConfigureEnemy(Enemy enemy)
     {
       enemy.transform.SetParent(_world);
@@ -55,8 +50,6 @@ namespace ShootEmUp
 
     private void EnemyHealthEnded(Enemy enemy)
     {
-      enemy.transform.SetParent(_enemiesContainer);
-      
       enemy.OnHealthEnded -= EnemyHealthEnded;
       
       _enemyPool.Return(enemy);

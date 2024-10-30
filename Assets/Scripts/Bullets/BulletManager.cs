@@ -1,16 +1,33 @@
-using Game.Health;
+using System.Collections.Generic;
+using Game.Pool;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-  public class BulletsController : MonoBehaviour
+  public class BulletManager : MonoBehaviour
   {
-    [SerializeField] private BulletsPool _bulletsPool;
     [SerializeField] private Transform _world;
-   
+    [SerializeField] private LevelBounds _levelBounds;
+    [SerializeField] private BulletsCreator _bulletsCreator;
+
+    private Pool<Bullet> _bulletsPool;
+    private List<Bullet> _activeBullets = new List<Bullet>();
+
     private void Awake()
     {
-      _bulletsPool.Prewarm(10);
+      _bulletsPool = new Pool<Bullet>(_bulletsCreator);
+    }
+
+    private void FixedUpdate()
+    {
+      foreach (Bullet bullet in _activeBullets)
+      {
+        if (!_levelBounds.InBounds(bullet.transform.position))
+        {
+          ReturnBulletToPool(bullet);
+          break;
+        }
+      }
     }
 
     public void SpawnBullet(int damage, Color color, int physicsLayer, Vector3 position, Vector2 velocity)
@@ -21,29 +38,21 @@ namespace ShootEmUp
       
       bullet.Init(position, velocity, damage, color, physicsLayer);
       
+      _activeBullets.Add(bullet);
+      
       bullet.OnCollisionEntered += BulletOnOnCollisionEntered;
-      bullet.OnBoundsExited += BulletBoundsExit;
     }
 
     private void BulletOnOnCollisionEntered(Bullet bullet, Collision2D collision)
     {
-      if (collision.gameObject.TryGetComponent(out HealthComponent healthComponent))
-      {
-        healthComponent.TakeDamage(bullet.Damage);
-      }
+      ReturnBulletToPool(bullet);
+    }
       
-      ReturnBulletToPool(bullet);
-    }
-
-    private void BulletBoundsExit(Bullet bullet)
-    {
-      ReturnBulletToPool(bullet);
-    }
-
     private void ReturnBulletToPool(Bullet bullet)
     {
+      _activeBullets.Remove(bullet);
+      
       bullet.OnCollisionEntered -= BulletOnOnCollisionEntered;
-      bullet.OnBoundsExited -= BulletBoundsExit;
       
       _bulletsPool.Return(bullet);
     }

@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace Game.Move
 {
-  public class MoveToPointComponent : MonoBehaviour
+  public class MoveAgent : MonoBehaviour
   {
-    [SerializeField] private MoveConfig _moveConfig;
-    [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private MoveComponent _moveComponent;
+    [SerializeField] private float _stopDistance;
     
     public void MoveTo(Vector2 destination, Action onReachedCallback)
     {
@@ -29,13 +29,11 @@ namespace Game.Move
       do
       {
         moveVector = destination - (Vector2)transform.position;
-        Vector2 direction = moveVector.normalized * Time.fixedDeltaTime;
-        Vector2 nextPosition = _rigidbody.position + direction * _moveConfig.Speed;
-        _rigidbody.MovePosition(nextPosition);
+        _moveComponent.Move(moveVector.normalized);
 
         yield return new WaitForFixedUpdate();
       } 
-      while (moveVector.magnitude > 0.25f);
+      while (moveVector.magnitude > _stopDistance);
       
       onReachedCallback?.Invoke();
     }
