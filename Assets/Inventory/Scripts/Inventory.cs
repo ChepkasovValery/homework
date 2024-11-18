@@ -17,8 +17,8 @@ namespace Inventories
         public int Height => _height;
         public int Count => _items.Count;
 
-        private Dictionary<Vector2Int, bool> _grid = new Dictionary<Vector2Int, bool>();
-        private Dictionary<Vector2Int, Item> _items = new Dictionary<Vector2Int, Item>();
+        private Item[,] _grid;
+        private Dictionary<Item, Vector2Int> _items = new Dictionary<Item, Vector2Int>();
         private int _width;
         private int _height;
 
@@ -84,7 +84,7 @@ namespace Inventories
             if (item == null)
                 return false;
 
-            if (_items.ContainsValue(item))
+            if (Contains(item))
                 return false;
 
             return CanAddItemOnPosition(posX, posY, item.Size.x, item.Size.y);
@@ -105,11 +105,11 @@ namespace Inventories
         {
             if (CanAddItem(item, posX, posY))
             {
-                FillGridArea(posX, posY, item.Size.x, item.Size.y, true);
+                FillGridArea(posX, posY, item);
 
                 Vector2Int pos = new Vector2Int(posX, posY);
 
-                _items.Add(pos, item);
+                _items.Add(item, pos);
                 
                 OnAdded?.Invoke(item, pos);
 
@@ -188,7 +188,13 @@ namespace Inventories
         /// <summary>
         /// Checks if a specified item exists
         /// </summary>
-        public bool Contains(in Item item) => _items.ContainsValue(item);
+        public bool Contains(in Item item)
+        {
+            if (item == null)
+                return false;
+            
+            return _items.ContainsKey(item);
+        }
 
         /// <summary>
         /// Checks if a specified position is occupied
@@ -200,41 +206,42 @@ namespace Inventories
         /// <summary>
         /// Checks if the a position is free
         /// </summary>
-        public bool IsFree(in Vector2Int position) => !_grid[position];
+        public bool IsFree(in Vector2Int position) => _grid[position.x, position.y] == null;
 
         public bool IsFree(in int x, in int y) => IsFree(new Vector2Int(x, y));
 
         /// <summary>
         /// Removes a specified item if exists
         /// </summary>
-        public bool RemoveItem(in Item item) => RemoveItem(in item, out Vector2Int _);
+        public bool RemoveItem(in Item item)
+        {
+            Vector2Int pos = _items[item];
+            
+            ClearGridArea(pos.x, pos.y, item.Size.x, item.Size.y);
+
+            _items.Remove(item);
+                
+            return true;
+        }
 
         public bool RemoveItem(in Item item, out Vector2Int position)
         {
-            if (item == null)
-            {
-                position = Vector2Int.zero;
-                return false;
-            }
-
-            foreach (KeyValuePair<Vector2Int, Item> pair in _items)
-            {
-                if (pair.Value == item)
-                {
-                    position = pair.Key;
-
-                    FillGridArea(position.x, position.y, item.Size.x, item.Size.y, false);
-
-                    _items.Remove(position);
-
-                    OnRemoved?.Invoke(item, position);
-
-                    return true;
-                }
-            }
-
             position = Vector2Int.zero;
 
+            if (item == null)
+                return false;
+            
+            if(_items.TryGetValue(item, out Vector2Int itemPos))
+            {
+                position = itemPos;
+                
+                RemoveItem(item);
+                
+                OnRemoved?.Invoke(item, itemPos);
+
+                return true;
+            }
+            
             return false;
         }
 
@@ -269,28 +276,14 @@ namespace Inventories
 
                 return false;
             }
-
-            if (!_grid[position])
+            
+            item = _grid[position.x, position.y];
+            
+            if (_grid[position.x, position.y] != null)
             {
-                item = null;
-                return false;
+                return true;
             }
 
-            foreach (KeyValuePair<Vector2Int, Item> pair in _items)
-            {
-                Vector2Int[] positions = GetPositions(pair.Value);
-
-                foreach (Vector2Int pos in positions)
-                {
-                    if (pos == position)
-                    {
-                        item = pair.Value;
-                        return true;
-                    }
-                }
-            }
-
-            item = null;
             return false;
         }
 
@@ -315,24 +308,20 @@ namespace Inventories
                 throw new NullReferenceException();
             }
 
-            foreach (KeyValuePair<Vector2Int, Item> pair in _items)
+            if (_items.TryGetValue(item, out Vector2Int itemPosition))
             {
-                if (pair.Value == item)
+                Vector2Int[] positions = new Vector2Int[item.Size.x * item.Size.y];
+                int index = 0;
+                
+                for (int x = itemPosition.x; x < itemPosition.x + item.Size.x; x++)
                 {
-                    Vector2Int[] positons = new Vector2Int[item.Size.x * item.Size.y];
-
-                    int index = 0;
-
-                    for (int x = pair.Key.x; x < pair.Key.x + item.Size.x; x++)
+                    for (int y = itemPosition.y; y < itemPosition.y + item.Size.y; y++)
                     {
-                        for (int y = pair.Key.y; y < pair.Key.y + item.Size.y; y++)
-                        {
-                            positons[index++] = new Vector2Int(x, y);
-                        }
+                        positions[index++] = new Vector2Int(x, y);
                     }
-
-                    return positons;
                 }
+
+                return positions;
             }
 
             throw new KeyNotFoundException();
@@ -342,7 +331,7 @@ namespace Inventories
         {
             positions = null;
 
-            if (!_items.ContainsValue(item))
+            if (!Contains(item))
                 return false;
 
             positions = GetPositions(in item);
@@ -377,9 +366,9 @@ namespace Inventories
         {
             int count = 0;
 
-            foreach (KeyValuePair<Vector2Int, Item> pair in _items)
+            foreach (Item item in _items.Keys)
             {
-                if (pair.Value.Name == name)
+                if (item.Name == name)
                 {
                     count++;
                 }
@@ -396,65 +385,25 @@ namespace Inventories
             if (item == null)
                 throw new ArgumentNullException();
 
-            if (!_items.ContainsValue(item))
+            if (!_items.ContainsKey(item))
                 return false;
-
-            if (position.x + item.Size.x >= _width || position.y + item.Size.y >= _height || 
-                position.x < 0 || position.y < 0)
+            
+            if (CanAddItemOnPositionWithoutSelfIntersect(position.x, position.y, item))
             {
-                return false;
+                Vector2Int currentItemPos = _items[item];
+                
+                ClearGridArea(currentItemPos.x, currentItemPos.y, item.Size.x, item.Size.y);
+                
+                FillGridArea(position.x, position.y, item);
+
+                _items[item] = position;
+                
+                OnMoved?.Invoke(item, position);
+
+                return true;
             }
 
-            Vector2Int currentPos = Vector2Int.zero;
-            List<Vector2Int> currentPositions = new List<Vector2Int>(item.Size.x * item.Size.y);
-            
-            for (int x = currentPos.x; x < currentPos.x + item.Size.x; x++)
-            {
-                for (int y = currentPos.y; y < currentPos.y + item.Size.y; y++)
-                {
-                    currentPositions.Add(new Vector2Int(x, y));
-                }
-            }
-            
-            for (int x = position.x; x < position.x + item.Size.x; x++)
-            {
-                for (int y = position.y; y < position.y + item.Size.y; y++)
-                {
-                    Vector2Int pos = new Vector2Int(x, y);
-                    
-                    if(currentPositions.Contains(pos))
-                        continue;
-                    
-                    if (_grid[pos])
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            
-            foreach (KeyValuePair<Vector2Int,Item> pair in _items)
-            {
-                if (pair.Value == item)
-                {
-                    currentPos = pair.Key;
-                    break;
-                }
-            }
-
-            foreach (Vector2Int currentPosition in currentPositions)
-            {
-                _grid[currentPosition] = false;
-            }
-            
-            FillGridArea(position.x, position.y, item.Size.x, item.Size.y, true);
-
-            _items.Remove(currentPos);
-            _items.Add(position, item);
-            
-            OnMoved?.Invoke(item, position);
-
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -463,76 +412,37 @@ namespace Inventories
         public void ReorganizeSpace()
         {
             ClearGrid();
-
-            List<Item> items = new List<Item>(_items.Count);
-
-            foreach (KeyValuePair<Vector2Int,Item> pair in _items)
-            {
-                items.Add(_items[pair.Key]);
-            }
             
-            _items.Clear();
+            var sortedBySize = from item in _items.Keys orderby item.Size.x * item.Size.y descending select item;
 
-            while (items.Count != 0)
+            foreach (Item item in sortedBySize)
             {
-                var sortedBySize = from item in items orderby item.Size.x * item.Size.y descending select item;
+                FindFreePosition(item, out Vector2Int pos);
+                
+                FillGridArea(pos.x, pos.y, item);
 
-                for (int y = 0; y < _height; y++)
-                {
-                    for (int x = 0; x < _width; x++)
-                    {
-                        foreach (Item item in sortedBySize)
-                        {
-                            if (CanAddItemOnPosition(x, y, item.Size.x, item.Size.y))
-                            {
-                                AddItem(item, new Vector2Int(x, y));
-                                items.Remove(item);
-                            }
-                        }
-                    }
-                }
+                _items[item] = pos;
             }
         }
 
         /// <summary>
         /// Copies inventory items to a specified matrix
         /// </summary>
-        public void CopyTo(in Item[,] matrix)
-        {
-            foreach (KeyValuePair<Vector2Int,Item> item in _items)
-            {
-                for (int x = item.Key.x; x < item.Key.x + item.Value.Size.x; x++)
-                {
-                    for (int y = item.Key.y; y < item.Key.y + item.Value.Size.y; y++)
-                    {
-                        matrix[x, y] = item.Value;
-                    }
-                }
-            }
-        }
+        public void CopyTo(in Item[,] matrix) => Array.Copy(_grid, matrix, matrix.Length);
 
         public IEnumerator<Item> GetEnumerator()
         {
-            foreach (KeyValuePair<Vector2Int,Item> pair in _items)
-            {
-                yield return pair.Value;
-            }
+            return _items.Keys.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         private void CreateGrid(int width, int height)
         {
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    _grid.Add(new Vector2Int(x, y), false);
-                }
-            }
+            _grid = new Item[width, height];
         }
         
-        private void ClearGrid() => FillGridArea(0, 0, _height, _width, false);
+        private void ClearGrid() => ClearGridArea(0, 0, _height, _width);
 
         private bool ValidateItem(in Item item)
         {
@@ -557,9 +467,9 @@ namespace Inventories
 
         private bool IsItemWithNameExists(in Item item)
         {
-            foreach (KeyValuePair<Vector2Int,Item> pair in _items)
+            foreach (KeyValuePair<Item,Vector2Int> pair in _items)
             {
-                if (pair.Value.Name == item.Name)
+                if (pair.Key.Name == item.Name)
                 {
                     return true;
                 }
@@ -578,7 +488,27 @@ namespace Inventories
             {
                 for (int y = posY; y < posY + sizeY; y++)
                 {
-                    if (_grid[new Vector2Int(x, y)])
+                    if (_grid[x, y] != null)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        
+        private bool CanAddItemOnPositionWithoutSelfIntersect(int posX, int posY, Item item)
+        {
+            if (posX < 0 || posX > _width || posY < 0 || posY > _height 
+                || posX + item.Size.x > _width || posY + item.Size.y > _height)
+                return false;
+
+            for (int x = posX; x < posX + item.Size.x; x++)
+            {
+                for (int y = posY; y < posY + item.Size.y; y++)
+                {
+                    if (_grid[x, y] != null && _grid[x, y] != item)
                     {
                         return false;
                     }
@@ -610,13 +540,24 @@ namespace Inventories
             }
         }
         
-        private void FillGridArea(int posX, int posY, int sizeX, int sizeY, bool value)
+        private void ClearGridArea(int posX, int posY, int sizeX, int sizeY)
         {
             for (int x = posX; x < posX + sizeX; x++)
             {
                 for (int y = posY; y < posY + sizeY; y++)
                 {
-                    _grid[new Vector2Int(x, y)] = value;
+                    _grid[x, y] = null;
+                }
+            }
+        }
+        
+        private void FillGridArea(int posX, int posY, Item item)
+        {
+            for (int x = posX; x < posX + item.Size.x; x++)
+            {
+                for (int y = posY; y < posY + item.Size.y; y++)
+                {
+                    _grid[x, y] = item;
                 }
             }
         }
