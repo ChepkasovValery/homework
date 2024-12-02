@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.CompilerServices;
-using System.Timers;
 
 [assembly: InternalsVisibleTo("EditMode")]
 namespace ResourceConverter.Scripts
@@ -10,23 +9,32 @@ namespace ResourceConverter.Scripts
     public bool IsWorking { get; private set; }
     public int InputCount { get; }
     public int OutputCount { get; }
+    public int InputZoneCapacity => _inputZone.Capacity;
+    public int InputZoneAmount => _inputZone.ResourceCount;
+    public int OutputZoneCapacity => _outputZone.Capacity;
+    public int OutputZoneAmount => _outputZone.ResourceCount;
     
-    internal readonly ResourceZone _inputZone;
-    internal readonly ResourceZone _outputZone;
+    private readonly ResourceZone _inputZone;
+    private readonly ResourceZone _outputZone;
     private readonly float _interval;
 
     private float _currentTime;
     private bool _resourcesInProgress;
 
-    public Converter(ResourceZone inputZone, ResourceZone outputZone, int inputCount, int outputCount, float interval)
+    public Converter(int inputZoneCapacity, int inputZoneAmount, int outputZoneCapacity, int outputZoneAmount,
+      int inputCount, int outputCount, float interval)
     {
-      if (inputCount < 0 || outputCount < 0 || interval < 0)
-      {
-        throw new ArgumentOutOfRangeException();
-      }
+      if (inputCount < 0)
+        throw new ArgumentOutOfRangeException("Input count must be greater than or equal to 0");
+      
+      if(outputCount < 0)
+        throw new ArgumentOutOfRangeException("Output count must be greater than or equal to 0");
 
-      _inputZone = inputZone;
-      _outputZone = outputZone;
+      if(interval < 0)
+        throw new ArgumentOutOfRangeException("Interval must be greater than or equal to 0");
+
+      _inputZone = new ResourceZone(inputZoneCapacity, inputZoneAmount);
+      _outputZone = new ResourceZone(outputZoneCapacity, outputZoneAmount);
       _interval = interval;
       InputCount = inputCount;
       OutputCount = outputCount;
@@ -37,27 +45,34 @@ namespace ResourceConverter.Scripts
     public void Update(float deltaTime)
     {
       if (deltaTime <= 0)
-        throw new ArgumentOutOfRangeException();
+        throw new ArgumentOutOfRangeException("Delta time must be greater than or equal to 0");
       
       if(!IsWorking)
         return;
       
+      if (_resourcesInProgress)
+      {
+        Tick(deltaTime);
+      }
+      else
+      {
+        TryGrabResourcesFromInputZone();
+      }
+    }
+
+    private void Tick(float deltaTime)
+    {
       _currentTime += deltaTime;
 
       while (_currentTime >= _interval)
       {
         _currentTime -= _interval;
-        
-        if(_resourcesInProgress)
-          ConvertResources();
+
+        ConvertResources();
 
         if (!TryGrabResourcesFromInputZone())
-        {
           break;
-        }
       }
-      
-      _currentTime = 0;
     }
 
     public void Start()
@@ -84,7 +99,7 @@ namespace ResourceConverter.Scripts
     public void AddResourcesToInputZone(int count, out int overflowCount)
     {
       if (count < 0)
-        throw new ArgumentOutOfRangeException();
+        throw new ArgumentOutOfRangeException("Count must be greater than or equal to 0");
       
       if (_inputZone.ResourceCount + count > _inputZone.Capacity)
       {
@@ -102,7 +117,7 @@ namespace ResourceConverter.Scripts
     
     private bool TryGrabResourcesFromInputZone()
     {
-      if (_outputZone.ResourceCount == _outputZone.Capacity)
+      if (OutputZoneAmount + OutputCount > OutputZoneCapacity)
       {
         return false;
       }

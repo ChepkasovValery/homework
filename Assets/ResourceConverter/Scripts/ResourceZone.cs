@@ -10,8 +10,14 @@ namespace ResourceConverter.Scripts
 
     public ResourceZone(int capacity, int resourceCount)
     {
-      if (capacity <= 0 || resourceCount < 0 || resourceCount > capacity)
-        throw new ArgumentOutOfRangeException();
+      if(capacity <= 0)
+        throw new ArgumentOutOfRangeException("Capacity must be greater than 0");
+      
+      if(resourceCount < 0)
+        throw new ArgumentOutOfRangeException("Resource count must be greater than or equal to 0");
+      
+      if(resourceCount > capacity)
+        throw new ArgumentOutOfRangeException("Resource count must be less than capacity");
       
       Capacity = capacity;
       ResourceCount = resourceCount;
