@@ -954,7 +954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinPrefab: {fileID: 1221131666036007499, guid: f37c023e6b8b06149a4215320dd7e482, type: 3}
   _world: {fileID: 1431199846}
-  _levelsCount: 2
+  _levelsCount: 3
 --- !u!114 &1352644621
 MonoBehaviour:
   m_ObjectHideFlags: 0
