@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -5529559837635670120}
   - component: {fileID: 826704383650994520}
   - component: {fileID: 2878607915345802796}
+  - component: {fileID: -9092616910640787204}
   m_Layer: 0
   m_Name: Minerals
   m_TagString: Untagged
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
+--- !u!114 &-9092616910640787204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541275248436962135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180f76dfbd584a13a9f971770c088339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4599538043321193884
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7101094721436459898}
   - component: {fileID: 8373576509460068638}
   - component: {fileID: 36567712859251736}
+  - component: {fileID: -7769433293162978771}
   m_Layer: 0
   m_Name: ResearchLab
   m_TagString: Untagged
@@ -90,6 +91,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
+--- !u!114 &-7769433293162978771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701287118088433974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180f76dfbd584a13a9f971770c088339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2131351396630845822
 PrefabInstance:
   m_ObjectHideFlags: 0
