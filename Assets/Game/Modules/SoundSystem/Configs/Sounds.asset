@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ad44466cac45148867ba447285de40, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: 
+  Sounds:
+    Jump: {fileID: 8300000, guid: 4a3d24c7a7d02497a9aa7b0018822e35, type: 3}
+    PlayerDamage: {fileID: 8300000, guid: 32f565ba94f200f49adb407cce64e873, type: 3}
+    Lava: {fileID: 8300000, guid: cd6cde2e439ce0b4984c66ae86955c23, type: 3}
+    Toss: {fileID: 8300000, guid: a2fb8d4706a16468592a6e50aa24de65, type: 3}
+    Push: {fileID: 8300000, guid: 3dbd84c2bfae847229cd1013f68c0da7, type: 3}
+    Trampoline: {fileID: 8300000, guid: 08ef3735b9527d54ab97d0e9fc9d505d, type: 3}

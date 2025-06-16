@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider
       objectReference: {fileID: 0}
+    - target: {fileID: 5554046834176312192, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2028,6 +2032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider
       objectReference: {fileID: 0}
+    - target: {fileID: 5554046834176312192, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2042,9 +2050,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985800779}
-  - component: {fileID: 985800783}
-  - component: {fileID: 985800785}
-  - component: {fileID: 985800786}
   m_Layer: 0
   m_Name: '[System]'
   m_TagString: Untagged
@@ -2067,42 +2072,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &985800783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985800778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9440a6ab5df242778da07c17179deaf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &985800785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985800778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28183f28ab34abc81a58a094876603f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &985800786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985800778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1296048d96b045c99e85d248760a087c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1000631199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,6 +2719,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5286831811384992043, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
+      propertyPath: _attackConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: da998f9b6082d485c9e0a3d8b7b141ae, type: 2}
     - target: {fileID: 8595837930061912479, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_Name
       value: Trampoline
@@ -3022,6 +2995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 54e305565d67c41a1ad6ff4f8e1a440e, type: 2}
+  - {fileID: 11400000, guid: 585e817012b0c4804af47f313be7aef9, type: 2}
   _monoInstallers: []
   _installerPrefabs: []
   _autoRun: 1
@@ -3108,6 +3082,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5286831811384992043, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
+      propertyPath: _attackConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: da998f9b6082d485c9e0a3d8b7b141ae, type: 2}
     - target: {fileID: 8595837930061912479, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_Name
       value: Trampoline
@@ -3258,7 +3236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5434138037557620653, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.75
+      value: -5.71
       objectReference: {fileID: 0}
     - target: {fileID: 7441270365842623162, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3329,6 +3307,10 @@ PrefabInstance:
     - target: {fileID: 5554046834176312192, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
       propertyPath: m_Name
       value: Spider
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554046834176312192, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3501,6 +3483,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5286831811384992043, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
+      propertyPath: _attackConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: da998f9b6082d485c9e0a3d8b7b141ae, type: 2}
     - target: {fileID: 8595837930061912479, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_Name
       value: Trampoline
@@ -4447,6 +4433,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1625251630}
     m_Modifications:
+    - target: {fileID: 1599025579162667576, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
+      propertyPath: m_Constraints
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1736318179580503177, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 57.5
@@ -4897,7 +4887,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8547868132614509888}
-  - component: {fileID: 4064385665924561737}
   m_Layer: 0
   m_Name: MovingLava
   m_TagString: Untagged
@@ -5034,18 +5023,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbffaeed802d5423ca044ce2c4c34f55, type: 3}
---- !u!114 &4064385665924561737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632417098175580217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2dda082a5204d1284bf779cab7e3753, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4085932541923840477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
@@ -5544,10 +5521,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6234911277722097155, guid: 059a7ddbcfb4f4b51a6fd1d2b168a503, type: 3}
-      propertyPath: _moveConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 4899f088ae86e4428bb74295e3515fac, type: 2}
     - target: {fileID: 7490323295220271620, guid: 059a7ddbcfb4f4b51a6fd1d2b168a503, type: 3}
       propertyPath: m_Name
       value: Character

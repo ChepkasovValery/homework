@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6944020362184734065}
   - component: {fileID: 7125585022512431628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7836685165928915669}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waypoint1
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367261905002020263}
   - component: {fileID: 3605157709041920492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1504080579300883975}
   - component: {fileID: 7937140358218983994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: <Sprite>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7462468015357190323}
   - component: {fileID: 2651056867698556546}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7302201298826456237}
-  m_Layer: 0
+  - component: {fileID: 9206881957037482758}
+  - component: {fileID: 6942458623608008429}
+  - component: {fileID: 6254359757637372308}
+  m_Layer: 8
   m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,6 +407,61 @@ Transform:
   - {fileID: 3188779134163127405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9206881957037482758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630584940079141506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 6942458623608008429}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &6942458623608008429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630584940079141506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23b34fd25dc4b6ca9a08b4eedc69a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthConfig: {fileID: 11400000, guid: 98992ef4a962c4c759eb8db06546d54e, type: 2}
+  _damageConfig: {fileID: 11400000, guid: 09ba98a6710fd405db0b9f1a55154e6e, type: 2}
+  _attackConfig: {fileID: 11400000, guid: d8c8a253eda9b4775b97844c6c7497fe, type: 2}
+  _moveConfig: {fileID: 11400000, guid: 76d0180b538a24814aac7f4b19d857d0, type: 2}
+  _damageAnimationConfig: {fileID: 11400000, guid: c7de5bfdb45f34f3597726e9f7bc838e, type: 2}
+  _triggerWatcher2D: {fileID: 8733053168291758231}
+  _waypoints:
+  - {fileID: 7836685165928915669}
+  - {fileID: 3188779134163127405}
+  _spriteRenderer: {fileID: 7937140358218983994}
+  _rigidbody2D: {fileID: 1745589832700849}
+  _body: {fileID: 1819249752555060710}
+--- !u!114 &6254359757637372308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630584940079141506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0455461e3dbd243959f4a3de48b356a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _context: {fileID: 9206881957037482758}
 --- !u!1 &7469774354018702093
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3188779134163127405}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waypoint2
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -447,6 +505,8 @@ GameObject:
   - component: {fileID: 1745589832700849}
   - component: {fileID: 519640766865834813}
   - component: {fileID: 464711613102087323}
+  - component: {fileID: 8733053168291758231}
+  - component: {fileID: 5537536049665950010}
   m_Layer: 8
   m_Name: <Snake>
   m_TagString: Untagged
@@ -530,7 +590,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.375}
+  m_Offset: {x: 0, y: 0.32}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -541,7 +601,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 0.75}
+  m_Size: {x: 4, y: 0.57}
   m_EdgeRadius: 0
 --- !u!61 &464711613102087323
 BoxCollider2D:
@@ -575,7 +635,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.375}
+  m_Offset: {x: 0, y: 0.32}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -586,8 +646,33 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 0.75}
+  m_Size: {x: 4, y: 0.57}
   m_EdgeRadius: 0
+--- !u!114 &8733053168291758231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521204571576199944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cd2dfdea04f629055cb9bbcf82ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5537536049665950010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521204571576199944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3dbf362d2a4b0b9e844ae25f756669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entity: {fileID: 6254359757637372308}
 --- !u!1 &9168432786817898581
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2315917673189246781}
   - component: {fileID: 7373436372039092287}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: <Audio>
   m_TagString: Untagged
   m_Icon: {fileID: 0}

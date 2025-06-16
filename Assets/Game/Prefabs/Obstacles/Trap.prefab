@@ -93,8 +93,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3075001735327464809}
+  - component: {fileID: 8914924750657819280}
+  - component: {fileID: 4415342159469253667}
+  - component: {fileID: 332928130621056872}
   - component: {fileID: 1650171991482105198}
   - component: {fileID: 8320438562223812922}
+  - component: {fileID: 4389569249924714395}
   m_Layer: 8
   m_Name: Trap
   m_TagString: Untagged
@@ -118,6 +122,51 @@ Transform:
   - {fileID: 4256784266667006698}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8914924750657819280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 4415342159469253667}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &4415342159469253667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca43060c37434e7e8f5f6381187dcbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthConfig: {fileID: 11400000, guid: 4277d9b5764c049b2a7f6435e45ac14d, type: 2}
+  _damageConfig: {fileID: 11400000, guid: db55df793d9b8400aa1868bd54c67436, type: 2}
+--- !u!114 &332928130621056872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0455461e3dbd243959f4a3de48b356a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _context: {fileID: 8914924750657819280}
 --- !u!50 &1650171991482105198
 Rigidbody2D:
   serializedVersion: 4
@@ -143,7 +192,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!60 &8320438562223812922
 PolygonCollider2D:
@@ -193,3 +242,16 @@ PolygonCollider2D:
       - {x: -0.5644675, y: 0.0016976148}
       - {x: 0.5652342, y: 0.0005790591}
   m_UseDelaunayMesh: 0
+--- !u!114 &4389569249924714395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331236207197526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3dbf362d2a4b0b9e844ae25f756669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entity: {fileID: 332928130621056872}

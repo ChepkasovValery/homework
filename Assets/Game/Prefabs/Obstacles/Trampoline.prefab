@@ -239,7 +239,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4979841302588641904}
+  - component: {fileID: 768171938500836722}
+  - component: {fileID: 5286831811384992043}
+  - component: {fileID: 2479372669298574056}
+  - component: {fileID: 2109870152424864837}
   - component: {fileID: 2682617834291874480}
+  - component: {fileID: 540925190681387664}
   m_Layer: 6
   m_Name: Trampoline
   m_TagString: Untagged
@@ -264,6 +269,64 @@ Transform:
   - {fileID: 7195593461678769857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &768171938500836722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 5286831811384992043}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &5286831811384992043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2c0c5da98f4769a4218f42423d00ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackConfig: {fileID: 11400000, guid: 6023952dd3ac94ae395f1d4603fe0654, type: 2}
+  _triggerWatcher2D: {fileID: 540925190681387664}
+--- !u!114 &2479372669298574056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0455461e3dbd243959f4a3de48b356a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _context: {fileID: 768171938500836722}
+--- !u!114 &2109870152424864837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3dbf362d2a4b0b9e844ae25f756669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entity: {fileID: 2479372669298574056}
 --- !u!61 &2682617834291874480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -309,3 +372,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &540925190681387664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cd2dfdea04f629055cb9bbcf82ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

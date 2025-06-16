@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5721669356159936717}
   - component: {fileID: 3627558026916702360}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2967207215463351549}
   - component: {fileID: 9189221690657252043}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7578775655687858522}
   - component: {fileID: 3353200082900331619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1114773270552738056}
-  m_Layer: 0
+  - component: {fileID: 8707511555017306854}
+  - component: {fileID: 5482661793710147111}
+  - component: {fileID: 5064466512461797914}
+  m_Layer: 8
   m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,6 +289,60 @@ Transform:
   - {fileID: 4629981065635871775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8707511555017306854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554046834176312192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 5064466512461797914}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &5482661793710147111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554046834176312192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0455461e3dbd243959f4a3de48b356a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _context: {fileID: 8707511555017306854}
+--- !u!114 &5064466512461797914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554046834176312192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9fa06fcfc444ed94511898bcb216a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthConfig: {fileID: 11400000, guid: 29db5da2b9a8e457092a56278b50031d, type: 2}
+  _damageConfig: {fileID: 11400000, guid: 461297dedba044dcca671930a3067b8f, type: 2}
+  _attackConfig: {fileID: 11400000, guid: 563010cd9dd4b4b199b5992794a5a23e, type: 2}
+  _damageAnimationConfig: {fileID: 11400000, guid: c7de5bfdb45f34f3597726e9f7bc838e, type: 2}
+  _moveConfig: {fileID: 11400000, guid: f3ecdba20085043e9b70114c201479e3, type: 2}
+  _triggerWatcher: {fileID: 6833212629418617803}
+  _waypoints:
+  - {fileID: 3929516699554365295}
+  - {fileID: 4629981065635871775}
+  _spriteRenderer: {fileID: 3123733364965956949}
+  _rigidbody2D: {fileID: 4015829716640782646}
 --- !u!1 &7187152835411801990
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629981065635871775}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waypoint2
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -326,7 +383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3929516699554365295}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waypoint1
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -358,7 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 797735510629636468}
   - component: {fileID: 3123733364965956949}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: <Sprite>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,6 +504,8 @@ GameObject:
   - component: {fileID: 4015829716640782646}
   - component: {fileID: 7422560000825944449}
   - component: {fileID: 7073503754261842485}
+  - component: {fileID: 6833212629418617803}
+  - component: {fileID: 9173859222176790008}
   m_Layer: 8
   m_Name: <Spider>
   m_TagString: Untagged
@@ -554,7 +613,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -587,3 +646,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &6833212629418617803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665529919726988981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cd2dfdea04f629055cb9bbcf82ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9173859222176790008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665529919726988981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3dbf362d2a4b0b9e844ae25f756669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entity: {fileID: 5482661793710147111}
